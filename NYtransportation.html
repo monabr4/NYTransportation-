@@ -1,0 +1,2724 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>A Bridge Too Far Notebook</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="NYtransportation_files/libs/clipboard/clipboard.min.js"></script>
+<script src="NYtransportation_files/libs/quarto-html/quarto.js"></script>
+<script src="NYtransportation_files/libs/quarto-html/popper.min.js"></script>
+<script src="NYtransportation_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="NYtransportation_files/libs/quarto-html/anchor.min.js"></script>
+<link href="NYtransportation_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="NYtransportation_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="NYtransportation_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="NYtransportation_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="NYtransportation_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+<script src="NYtransportation_files/libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="NYtransportation_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">A Bridge Too Far Notebook</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Importing Libraries and Data Set:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 214 × 10
+   date  day     HighTempF LowTempF precipitation brooklynbridge manhattanbridge
+   &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;                  &lt;dbl&gt;           &lt;dbl&gt;
+ 1 4/1   Saturd…      46       37   0.00                     606            1446
+ 2 4/2   Sunday       62.1     41   0.00                    2021            3943
+ 3 4/3   Monday       63       50   0.03                    2470            4988
+ 4 4/4   Tuesday      51.1     46   1.18                     723            1913
+ 5 4/5   Wednes…      63       46   0.00                    2807            5276
+ 6 4/6   Thursd…      48.9     41   0.73                     461            1324
+ 7 4/7   Friday       48       43   T                       1222            2955
+ 8 4/8   Saturd…      55.9     39.9 0.00                    1674            3163
+ 9 4/9   Sunday       66       45   0.00                    2375            4377
+10 4/10  Monday       73.9     55   0.00                    3324            6359
+# ℹ 204 more rows
+# ℹ 3 more variables: williamsburgbridge &lt;dbl&gt;, queensborobridge &lt;dbl&gt;,
+#   total &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>Converting <strong><code>date</code></strong> from &lt;chr&gt; to &lt;date&gt;.</p>
+<p>Creating a new column called <strong><code>month</code></strong></p>
+<p>Checking for missing values:</p>
+<p>Recoding the values and impute for <strong><code>precipitation</code></strong>:</p>
+<p><br>
+Converting <strong><code>precipitation</code></strong> from &lt;chr&gt; to &lt;dbl&gt;</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "date"               "day"                "HighTempF"         
+ [4] "LowTempF"           "precipitation"      "brooklynbridge"    
+ [7] "manhattanbridge"    "williamsburgbridge" "queensborobridge"  
+[10] "total"              "month"              "rain"              
+[13] "average_temp"      </code></pre>
+</div>
+</div>
+<p>Removed columns <strong><code>HighTempF</code></strong>, <strong><code>LowTempF</code></strong>, <strong><code>Precipitation</code></strong>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>NY_cycling_data <span class="ot">&lt;-</span> NY_cycling_data[, <span class="fu">c</span>(<span class="st">"date"</span>, <span class="st">"day"</span>, <span class="st">"brooklynbridge"</span>, <span class="st">"manhattanbridge"</span>, <span class="st">"williamsburgbridge"</span>, <span class="st">"queensborobridge"</span>, <span class="st">"total"</span>, <span class="st">"month"</span>, <span class="st">"rain"</span>, <span class="st">"average_temp"</span>)]</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>NY_cycling_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 214 × 10
+   date       day       brooklynbridge manhattanbridge williamsburgbridge
+   &lt;date&gt;     &lt;chr&gt;              &lt;dbl&gt;           &lt;dbl&gt;              &lt;dbl&gt;
+ 1 2017-04-01 Saturday             606            1446               1915
+ 2 2017-04-02 Sunday              2021            3943               4207
+ 3 2017-04-03 Monday              2470            4988               5178
+ 4 2017-04-04 Tuesday              723            1913               2279
+ 5 2017-04-05 Wednesday           2807            5276               5711
+ 6 2017-04-06 Thursday             461            1324               1739
+ 7 2017-04-07 Friday              1222            2955               3399
+ 8 2017-04-08 Saturday            1674            3163               4082
+ 9 2017-04-09 Sunday              2375            4377               4886
+10 2017-04-10 Monday              3324            6359               6881
+# ℹ 204 more rows
+# ℹ 5 more variables: queensborobridge &lt;dbl&gt;, total &lt;dbl&gt;, month &lt;dbl&gt;,
+#   rain &lt;dbl&gt;, average_temp &lt;dbl&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(NY_cycling_data<span class="sc">$</span>month)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  4  5  6  7  8  9 10</code></pre>
+</div>
+</div>
+<p><br>
+Converted <strong><code>months</code></strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert numeric months to labels</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>month_labels <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"April"</span>, <span class="st">"May"</span>, <span class="st">"June"</span>, <span class="st">"July"</span>, <span class="st">"August"</span>, <span class="st">"September"</span>, <span class="st">"October"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>NY_cycling_data<span class="sc">$</span>month <span class="ot">&lt;-</span> month_labels[NY_cycling_data<span class="sc">$</span>month <span class="sc">-</span> <span class="fu">min</span>(NY_cycling_data<span class="sc">$</span>month) <span class="sc">+</span> <span class="dv">1</span>]</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>NY_cycling_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 214 × 10
+   date       day       brooklynbridge manhattanbridge williamsburgbridge
+   &lt;date&gt;     &lt;chr&gt;              &lt;dbl&gt;           &lt;dbl&gt;              &lt;dbl&gt;
+ 1 2017-04-01 Saturday             606            1446               1915
+ 2 2017-04-02 Sunday              2021            3943               4207
+ 3 2017-04-03 Monday              2470            4988               5178
+ 4 2017-04-04 Tuesday              723            1913               2279
+ 5 2017-04-05 Wednesday           2807            5276               5711
+ 6 2017-04-06 Thursday             461            1324               1739
+ 7 2017-04-07 Friday              1222            2955               3399
+ 8 2017-04-08 Saturday            1674            3163               4082
+ 9 2017-04-09 Sunday              2375            4377               4886
+10 2017-04-10 Monday              3324            6359               6881
+# ℹ 204 more rows
+# ℹ 5 more variables: queensborobridge &lt;dbl&gt;, total &lt;dbl&gt;, month &lt;chr&gt;,
+#   rain &lt;dbl&gt;, average_temp &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p><strong>Title: NYC Cycling Data Codebook</strong></p>
+<p><strong>Dataset Information:</strong> - Name: NY_cycling_data</p>
+<p><strong>Variable List:</strong></p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>        Variable_Name Variable_Type                          Description
+1                date          Date                            Month/Day
+2             weekend   Categorical                  Weekend/Not Weekend
+3               month   Categorical                                Month
+4 average_temperature     Numerical            Average daily temperature
+5                rain     Numerical                  Daily precipitation
+6      brooklynbridge     Numerical     # of riders over Brooklyn Bridge
+7     manhattanbridge     Numerical    # of riders over Manhattan Bridge
+8  williamsburgbridge     Numerical # of riders over Williamsburg Bridge
+9               total     Numerical Total riders over these four bridges
+   Measurement_Unit Missing_Values
+1        YYYY-MM-DD           None
+2               0/1           None
+3 April/May/June...           None
+4        Fahrenheit           None
+5            Inches           None
+6             Count           None
+7             Count           None
+8             Count           None
+9             Count           None</code></pre>
+</div>
+<div class="cell-output-display">
+<div class="table-responsive">
+<table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Variable_Name</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Variable_Type</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Description</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Measurement_Unit</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Missing_Values</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">date</td>
+<td style="text-align: left;">Date</td>
+<td style="text-align: left;">Month/Day</td>
+<td style="text-align: left;">YYYY-MM-DD</td>
+<td style="text-align: left;">None</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">weekend</td>
+<td style="text-align: left;">Categorical</td>
+<td style="text-align: left;">Weekend/Not Weekend</td>
+<td style="text-align: left;">0/1</td>
+<td style="text-align: left;">None</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">month</td>
+<td style="text-align: left;">Categorical</td>
+<td style="text-align: left;">Month</td>
+<td style="text-align: left;">April/May/June...</td>
+<td style="text-align: left;">None</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">average_temperature</td>
+<td style="text-align: left;">Numerical</td>
+<td style="text-align: left;">Average daily temperature</td>
+<td style="text-align: left;">Fahrenheit</td>
+<td style="text-align: left;">None</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">rain</td>
+<td style="text-align: left;">Numerical</td>
+<td style="text-align: left;">Daily precipitation</td>
+<td style="text-align: left;">Inches</td>
+<td style="text-align: left;">None</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">brooklynbridge</td>
+<td style="text-align: left;">Numerical</td>
+<td style="text-align: left;"># of riders over Brooklyn Bridge</td>
+<td style="text-align: left;">Count</td>
+<td style="text-align: left;">None</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">manhattanbridge</td>
+<td style="text-align: left;">Numerical</td>
+<td style="text-align: left;"># of riders over Manhattan Bridge</td>
+<td style="text-align: left;">Count</td>
+<td style="text-align: left;">None</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">williamsburgbridge</td>
+<td style="text-align: left;">Numerical</td>
+<td style="text-align: left;"># of riders over Williamsburg Bridge</td>
+<td style="text-align: left;">Count</td>
+<td style="text-align: left;">None</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">total</td>
+<td style="text-align: left;">Numerical</td>
+<td style="text-align: left;">Total riders over these four bridges</td>
+<td style="text-align: left;">Count</td>
+<td style="text-align: left;">None</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+<p>Summary Statistic on Numerical Data:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;table class="Rtable1"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th class='rowlabel firstrow lastrow'&gt;&lt;/th&gt;
+&lt;th class='firstrow lastrow'&gt;&lt;span class='stratlabel'&gt;TRUE&lt;br&gt;&lt;span class='stratn'&gt;(N=214)&lt;/span&gt;&lt;/span&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class='rowlabel firstrow'&gt;Brooklyn Bridge&lt;/td&gt;
+&lt;td class='firstrow'&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class='rowlabel'&gt;Mean (SD)&lt;/td&gt;
+&lt;td&gt;2680 (855)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class='rowlabel lastrow'&gt;Median [Min, Max]&lt;/td&gt;
+&lt;td class='lastrow'&gt;2860 [151, 4960]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class='rowlabel firstrow'&gt;Manhattan Bridge&lt;/td&gt;
+&lt;td class='firstrow'&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class='rowlabel'&gt;Mean (SD)&lt;/td&gt;
+&lt;td&gt;5350 (1750)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class='rowlabel lastrow'&gt;Median [Min, Max]&lt;/td&gt;
+&lt;td class='lastrow'&gt;5610 [484, 8240]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class='rowlabel firstrow'&gt;Williamsburg Bridge&lt;/td&gt;
+&lt;td class='firstrow'&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class='rowlabel'&gt;Mean (SD)&lt;/td&gt;
+&lt;td&gt;6050 (1760)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class='rowlabel lastrow'&gt;Median [Min, Max]&lt;/td&gt;
+&lt;td class='lastrow'&gt;6290 [874, 8870]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class='rowlabel firstrow'&gt;Queensboro Bridge&lt;/td&gt;
+&lt;td class='firstrow'&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class='rowlabel'&gt;Mean (SD)&lt;/td&gt;
+&lt;td&gt;4550 (1310)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class='rowlabel lastrow'&gt;Median [Min, Max]&lt;/td&gt;
+&lt;td class='lastrow'&gt;4680 [865, 6580]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class='rowlabel firstrow'&gt;Total&lt;/td&gt;
+&lt;td class='firstrow'&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class='rowlabel'&gt;Mean (SD)&lt;/td&gt;
+&lt;td&gt;18600 (5540)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class='rowlabel lastrow'&gt;Median [Min, Max]&lt;/td&gt;
+&lt;td class='lastrow'&gt;19400 [2370, 27000]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class='rowlabel firstrow'&gt;rain&lt;/td&gt;
+&lt;td class='firstrow'&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class='rowlabel'&gt;Mean (SD)&lt;/td&gt;
+&lt;td&gt;0.132 (0.394)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class='rowlabel lastrow'&gt;Median [Min, Max]&lt;/td&gt;
+&lt;td class='lastrow'&gt;0 [0, 3.03]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class='rowlabel firstrow'&gt;High Temp (°F)&lt;/td&gt;
+&lt;td class='firstrow'&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class='rowlabel'&gt;Mean (SD)&lt;/td&gt;
+&lt;td&gt;68.1 (9.57)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class='rowlabel lastrow'&gt;Median [Min, Max]&lt;/td&gt;
+&lt;td class='lastrow'&gt;70.0 [41.5, 86.0]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+</div>
+</div>
+<p>Adding Weekend</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>NY_cycling_data <span class="ot">&lt;-</span> NY_cycling_data <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">weekend =</span> <span class="fu">ifelse</span>(day <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Saturday"</span>, <span class="st">"Sunday"</span>), <span class="dv">1</span>, <span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Overall Months and Days</p>
+<p><img src="http://127.0.0.1:46825/chunk_output/A2CEC561f0252be9/24A16467/cgsa52jkycp34/00006d.png" class="img-fluid"></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>monthly_counts <span class="ot">&lt;-</span> NY_cycling_data <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="at">month =</span> <span class="fu">factor</span>(<span class="fu">format</span>(date, <span class="st">"%B"</span>), <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"April"</span>, <span class="st">"May"</span>, <span class="st">"June"</span>, <span class="st">"July"</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">average_total_riders =</span> <span class="fu">mean</span>(total))</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>daily_counts <span class="ot">&lt;-</span> NY_cycling_data <span class="sc">%&gt;%</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(weekend) <span class="sc">%&gt;%</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">average_total_riders =</span> <span class="fu">mean</span>(total))</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Daily pattern</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(daily_counts, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(weekend), <span class="at">y =</span> average_total_riders)) <span class="sc">+</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Average Weekly Cycling Behavior"</span>,</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"(Weekend = 1)/(Weekday - 2) "</span>,</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Average Total Riders"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="NYtransportation_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><br>
+</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>NY_cycling_data <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(month) <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">mean =</span> <span class="fu">mean</span>(total), <span class="at">sd =</span> <span class="fu">sd</span>(total)) <span class="sc">%&gt;%</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">month =</span> <span class="fu">factor</span>(month, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"April"</span>, <span class="st">"May"</span>, <span class="st">"June"</span>, <span class="st">"July"</span>, <span class="st">"August"</span>, <span class="st">"September"</span>, <span class="st">"October"</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(month)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 4
+  month         n   mean    sd
+  &lt;fct&gt;     &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;
+1 April        30 15029. 5518.
+2 May          31 17196. 6387.
+3 June         30 19894. 4999.
+4 July         31 18805. 4763.
+5 August       31 20367. 4684.
+6 September    30 20435. 4979.
+7 October      31 18652. 5640.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>NY_cycling_data <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(weekend) <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">mean =</span> <span class="fu">mean</span>(total), <span class="at">sd =</span> <span class="fu">sd</span>(total))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 4
+  weekend     n   mean    sd
+    &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;
+1       0   152 20099. 5459.
+2       1    62 15020. 3843.</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>daily_avg_counts <span class="ot">&lt;-</span> NY_cycling_data <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(weekend) <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_brooklyn =</span> <span class="fu">mean</span>(brooklynbridge),</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">var_brooklyn =</span> <span class="fu">sd</span>(brooklynbridge, <span class="at">na.rm=</span>T)<span class="sc">^</span><span class="dv">2</span>,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">avg_manhattan =</span> <span class="fu">mean</span>(manhattanbridge),</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">var_manhattanbridge =</span> <span class="fu">sd</span>(manhattanbridge, <span class="at">na.rm=</span>T)<span class="sc">^</span><span class="dv">2</span>,</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">avg_williamsburgbridge =</span> <span class="fu">mean</span>(williamsburgbridge),</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">var_williamsburgbridge =</span> <span class="fu">sd</span>(williamsburgbridge, <span class="at">na.rm=</span>T)<span class="sc">^</span><span class="dv">2</span>,</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">avg_queensborobridge =</span> <span class="fu">mean</span>(queensborobridge),</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">var_queensborobridge =</span> <span class="fu">sd</span>(queensborobridge, <span class="at">na.rm=</span>T)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>daily_avg_counts</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 9
+  weekend avg_brooklyn var_brooklyn avg_manhattan var_manhattanbridge
+    &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;         &lt;dbl&gt;               &lt;dbl&gt;
+1       0        2783.      694637.         5859.            2889125.
+2       1        2428.      740689.         4087.            1231612.
+# ℹ 4 more variables: avg_williamsburgbridge &lt;dbl&gt;,
+#   var_williamsburgbridge &lt;dbl&gt;, avg_queensborobridge &lt;dbl&gt;,
+#   var_queensborobridge &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<section id="brooklyn-bridge" class="level1">
+<h1>#1 Brooklyn Bridge</h1>
+<p>How are our independent variables related to the outcome?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>NY_cycling_data <span class="sc">%&gt;%</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(weekend) <span class="sc">%&gt;%</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">mean =</span> <span class="fu">mean</span>(brooklynbridge), <span class="at">sd =</span> <span class="fu">sd</span>(brooklynbridge)) <span class="sc">%&gt;%</span><span class="fu">arrange</span>(weekend)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 4
+  weekend     n  mean    sd
+    &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+1       0   152 2783.  833.
+2       1    62 2428.  861.</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>NY_cycling_data <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(month) <span class="sc">%&gt;%</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">mean =</span> <span class="fu">mean</span>(brooklynbridge), <span class="at">sd =</span> <span class="fu">sd</span>(brooklynbridge)) <span class="sc">%&gt;%</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">month =</span> <span class="fu">factor</span>(month, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"April"</span>, <span class="st">"May"</span>, <span class="st">"June"</span>, <span class="st">"July"</span>, <span class="st">"August"</span>, <span class="st">"September"</span>, <span class="st">"October"</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(month)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 4
+  month         n  mean    sd
+  &lt;fct&gt;     &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 April        30 2250.  980.
+2 May          31 2451.  972.
+3 June         30 2757.  683.
+4 July         31 2756.  659.
+5 August       31 3060.  822.
+6 September    30 2896.  754.
+7 October      31 2585.  865.</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GGally)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Registered S3 method overwritten by 'GGally':
+  method from   
+  +.gg   ggplot2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>bb_correlation_data <span class="ot">&lt;-</span> NY_cycling_data[, <span class="fu">c</span>(<span class="st">"brooklynbridge"</span>, <span class="st">"average_temp"</span>, <span class="st">"rain"</span>)]</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggpairs</span>(bb_correlation_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="NYtransportation_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="NYtransportation_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="NYtransportation_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="NYtransportation_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<section id="modeling" class="level2">
+<h2 class="anchored" data-anchor-id="modeling">Modeling:</h2>
+<p>I will be centering since there’s interaction:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Centering on its mean</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>brooklynbridge_data <span class="ot">&lt;-</span>NY_cycling_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(brooklynbridge,rain, average_temp, weekend,month)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>centered_brooklynbridge_data <span class="ot">&lt;-</span> brooklynbridge_data <span class="sc">%&gt;%</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rain =</span> rain <span class="sc">-</span> <span class="fu">mean</span>(rain), <span class="at">average_temp =</span> average_temp <span class="sc">-</span> <span class="fu">mean</span>(average_temp))</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>centered_brooklynbridge_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 214 × 5
+   brooklynbridge   rain average_temp weekend month
+            &lt;dbl&gt;  &lt;dbl&gt;        &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;
+ 1            606 -0.132       -26.6        1 April
+ 2           2021 -0.132       -16.6        1 April
+ 3           2470 -0.102       -11.6        0 April
+ 4            723  1.05        -19.6        0 April
+ 5           2807 -0.132       -13.6        0 April
+ 6            461  0.598       -23.2        0 April
+ 7           1222 -0.131       -22.6        0 April
+ 8           1674 -0.132       -20.2        1 April
+ 9           2375 -0.132       -12.6        1 April
+10           3324 -0.132        -3.66       0 April
+# ℹ 204 more rows</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Check the relationship between varaibles --</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Against the Null Model </span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>bb_null_poisson_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(brooklynbridge <span class="sc">~</span> <span class="dv">1</span>, <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>), <span class="at">data =</span> centered_brooklynbridge_data)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bb_null_poisson_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = brooklynbridge ~ 1, family = poisson(link = "log"), 
+    data = centered_brooklynbridge_data)
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)  7.89359    0.00132    5978   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 70021  on 213  degrees of freedom
+Residual deviance: 70021  on 213  degrees of freedom
+AIC: 72087
+
+Number of Fisher Scoring iterations: 4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#average_temp + Rain</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>bb_poisson_model2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(brooklynbridge <span class="sc">~</span> average_temp <span class="sc">+</span> <span class="fu">as.numeric</span>(rain), <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>), <span class="at">data =</span> centered_brooklynbridge_data)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Average_ + Rain + month </span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>bb_poisson_model3 <span class="ot">&lt;-</span> <span class="fu">glm</span>(brooklynbridge <span class="sc">~</span>average_temp <span class="sc">+</span> <span class="fu">as.numeric</span>(rain) <span class="sc">+</span> <span class="fu">factor</span>(month) , <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>), <span class="at">data =</span> centered_brooklynbridge_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Full Model (Sequence) Added average_temp + rain + month + days </span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>bb_full_poisson_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(brooklynbridge <span class="sc">~</span> average_temp <span class="sc">+</span> <span class="fu">as.numeric</span>(rain) <span class="sc">+</span> <span class="fu">factor</span>(month) <span class="sc">+</span> <span class="fu">factor</span>(weekend), <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>), <span class="at">data =</span> centered_brooklynbridge_data)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(bb_null_poisson_model,bb_poisson_model2,bb_poisson_model3, bb_full_poisson_model, <span class="at">test =</span> <span class="st">"LRT"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table
+
+Model 1: brooklynbridge ~ 1
+Model 2: brooklynbridge ~ average_temp + as.numeric(rain)
+Model 3: brooklynbridge ~ average_temp + as.numeric(rain) + factor(month)
+Model 4: brooklynbridge ~ average_temp + as.numeric(rain) + factor(month) + 
+    factor(weekend)
+  Resid. Df Resid. Dev Df Deviance  Pr(&gt;Chi)    
+1       213      70021                          
+2       211      33806  2    36216 &lt; 2.2e-16 ***
+3       205      32863  6      943 &lt; 2.2e-16 ***
+4       204      31677  1     1185 &lt; 2.2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pois_pearson_gof</span>(bb_full_poisson_model) <span class="co">#&gt;&gt;&gt; 1.445647e-193 BAD FIT </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$pval
+[1] 0
+
+$df
+[1] 204</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">#pois_dev_gof(bb_full_poisson_model) </span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co">#anova(bb_full_poisson_model, test= "LRT")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="mfp" class="level2">
+<h2 class="anchored" data-anchor-id="mfp">MFP:</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co">#MFP</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mfp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: survival</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>mfp<span class="sc">::</span><span class="fu">mfp</span>(brooklynbridge <span class="sc">~</span> <span class="fu">fp</span>(average_temp), </span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">family =</span> poisson,</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">data =</span> centered_brooklynbridge_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+mfp::mfp(formula = brooklynbridge ~ fp(average_temp), data = centered_brooklynbridge_data, 
+    family = poisson)
+
+
+Deviance table:
+         Resid. Dev
+Null model   70021.32
+Linear model     60013.28
+Final model  54703.51
+
+Fractional polynomials:
+             df.initial select alpha df.final power1 power2
+average_temp          4      1  0.05        4     -2     -1
+
+
+Transformations of covariates:
+                                                                   formula
+average_temp I(((average_temp+26.7)/10)^-2)+I(((average_temp+26.7)/10)^-1)
+
+Coefficients:
+     Intercept  average_temp.1  average_temp.2  
+      8.156126        0.004966       -0.595707  
+
+Degrees of Freedom: 213 Total (i.e. Null);  211 Residual
+Null Deviance:      70020 
+Residual Deviance: 54700    AIC: 56770 </code></pre>
+</div>
+</div>
+<section id="section" class="level3">
+<h3 class="anchored" data-anchor-id="section"></h3>
+</section>
+<section id="interaction-and-confouding" class="level3">
+<h3 class="anchored" data-anchor-id="interaction-and-confouding">Interaction and Confouding:</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co">#confounding</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the full Poisson regression model</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>bb_full_poisson_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(brooklynbridge <span class="sc">~</span>  <span class="fu">factor</span>(month) <span class="sc">+</span> <span class="fu">factor</span>(weekend)<span class="sc">+</span> average_temp <span class="sc">+</span> <span class="fu">as.numeric</span>(rain) , <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>), <span class="at">data =</span> centered_brooklynbridge_data)</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Includce interaction term between average_temp and rain</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>bb_interaction_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(brooklynbridge <span class="sc">~</span>  <span class="fu">factor</span>(month) <span class="sc">+</span> <span class="fu">factor</span>(weekend) <span class="sc">+</span> average_temp <span class="sc">+</span> <span class="fu">as.numeric</span>(rain) <span class="sc">+</span>average_temp <span class="sc">*</span> <span class="fu">as.numeric</span>(rain) , <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>), <span class="at">data =</span> centered_brooklynbridge_data)</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare the models using ANOVA</span></span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>anova_result <span class="ot">&lt;-</span> <span class="fu">anova</span>(bb_full_poisson_model, bb_interaction_model, <span class="at">test =</span> <span class="st">"LRT"</span>)</span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(anova_result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table
+
+Model 1: brooklynbridge ~ factor(month) + factor(weekend) + average_temp + 
+    as.numeric(rain)
+Model 2: brooklynbridge ~ factor(month) + factor(weekend) + average_temp + 
+    as.numeric(rain) + average_temp * as.numeric(rain)
+  Resid. Df Resid. Dev Df Deviance  Pr(&gt;Chi)    
+1       204      31677                          
+2       203      28887  1     2790 &lt; 2.2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</section>
+<section id="overdispersion-test-and-aicbic" class="level3">
+<h3 class="anchored" data-anchor-id="overdispersion-test-and-aicbic">Overdispersion Test and AIC/BIC:</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>bb_interaction_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(brooklynbridge <span class="sc">~</span> average_temp <span class="sc">*</span> <span class="fu">as.numeric</span>(rain) <span class="sc">+</span> <span class="fu">factor</span>(month) <span class="sc">+</span> <span class="fu">factor</span>(weekend), <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>), <span class="at">data =</span> centered_brooklynbridge_data)</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>AER<span class="sc">::</span><span class="fu">dispersiontest</span>(bb_interaction_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Overdispersion test
+
+data:  bb_interaction_model
+z = 5.318, p-value = 5.245e-08
+alternative hypothesis: true dispersion is greater than 1
+sample estimates:
+dispersion 
+  142.8918 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>bb_aic_value_org <span class="ot">&lt;-</span> <span class="fu">AIC</span>(bb_poisson_model3)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>bb_bic_value_org <span class="ot">&lt;-</span> <span class="fu">BIC</span>(bb_poisson_model3)</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>bb_aic_value <span class="ot">&lt;-</span> <span class="fu">AIC</span>(bb_interaction_model)</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>bb_bic_value <span class="ot">&lt;-</span> <span class="fu">BIC</span>(bb_interaction_model)</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>bb_aic_value_org</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 34944.93</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>bb_bic_value_org</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 34975.23</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>bb_aic_value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 30973.54</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>bb_bic_value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 31010.57</code></pre>
+</div>
+</div>
+<p>How is our outcome variable distributed?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>centered_brooklynbridge_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(brooklynbridge) <span class="sc">%&gt;%</span> skimr<span class="sc">::</span><span class="fu">skim</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<table style="width: auto;" class="table table-condensed">
+<caption>
+Data summary
+</caption>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Name
+</td>
+<td style="text-align:left;">
+Piped data
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Number of rows
+</td>
+<td style="text-align:left;">
+214
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Number of columns
+</td>
+<td style="text-align:left;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+_______________________
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Column type frequency:
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+numeric
+</td>
+<td style="text-align:left;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+________________________
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Group variables
+</td>
+<td style="text-align:left;">
+None
+</td>
+</tr>
+</tbody>
+
+</table>
+<p><strong>Variable type: numeric</strong></p>
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+skim_variable
+</th>
+<th style="text-align:right;">
+n_missing
+</th>
+<th style="text-align:right;">
+complete_rate
+</th>
+<th style="text-align:right;">
+mean
+</th>
+<th style="text-align:right;">
+sd
+</th>
+<th style="text-align:right;">
+p0
+</th>
+<th style="text-align:right;">
+p25
+</th>
+<th style="text-align:right;">
+p50
+</th>
+<th style="text-align:right;">
+p75
+</th>
+<th style="text-align:right;">
+p100
+</th>
+<th style="text-align:left;">
+hist
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+brooklynbridge
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2680.04
+</td>
+<td style="text-align:right;">
+854.71
+</td>
+<td style="text-align:right;">
+151
+</td>
+<td style="text-align:right;">
+2298
+</td>
+<td style="text-align:right;">
+2857
+</td>
+<td style="text-align:right;">
+3285
+</td>
+<td style="text-align:right;">
+4960
+</td>
+<td style="text-align:left;">
+▂▂▇▇▁
+</td>
+</tr>
+</tbody>
+
+</table>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>bb_negbin_model <span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(brooklynbridge <span class="sc">~</span> <span class="fu">factor</span>(month) <span class="sc">+</span> <span class="fu">factor</span>(weekend) <span class="sc">+</span>  average_temp <span class="sc">+</span> <span class="fu">as.numeric</span>(rain) <span class="sc">+</span> average_temp <span class="sc">*</span> <span class="fu">as.numeric</span>(rain), <span class="at">data=</span> centered_brooklynbridge_data)</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bb_negbin_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm.nb(formula = brooklynbridge ~ factor(month) + factor(weekend) + 
+    average_temp + as.numeric(rain) + average_temp * as.numeric(rain), 
+    data = centered_brooklynbridge_data, init.theta = 12.60541684, 
+    link = log)
+
+Coefficients:
+                               Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)                    7.846776   0.062089 126.380  &lt; 2e-16 ***
+factor(month)August            0.090407   0.086915   1.040  0.29826    
+factor(month)July             -0.023677   0.091860  -0.258  0.79660    
+factor(month)June              0.041951   0.085509   0.491  0.62371    
+factor(month)May               0.076232   0.073747   1.034  0.30128    
+factor(month)October           0.048764   0.075006   0.650  0.51560    
+factor(month)September         0.073456   0.082240   0.893  0.37176    
+factor(weekend)1              -0.120589   0.042815  -2.817  0.00485 ** 
+average_temp                   0.014798   0.002873   5.151 2.59e-07 ***
+as.numeric(rain)              -0.630129   0.057495 -10.960  &lt; 2e-16 ***
+average_temp:as.numeric(rain)  0.016346   0.005478   2.984  0.00285 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for Negative Binomial(12.6054) family taken to be 1)
+
+    Null deviance: 460.89  on 213  degrees of freedom
+Residual deviance: 218.15  on 203  degrees of freedom
+AIC: 3438.9
+
+Number of Fisher Scoring iterations: 1
+
+              Theta:  12.61 
+          Std. Err.:  1.22 
+
+ 2 x log-likelihood:  -3414.874 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co">#GOF</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(bb_negbin_model, <span class="at">test =</span> <span class="st">"LRT"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in anova.negbin(bb_negbin_model, test = "LRT"): tests made without
+re-estimating 'theta'</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table
+
+Model: Negative Binomial(12.6054), link: log
+
+Response: brooklynbridge
+
+Terms added sequentially (first to last)
+
+                              Df Deviance Resid. Df Resid. Dev  Pr(&gt;Chi)    
+NULL                                            213     460.89              
+factor(month)                  6   24.454       207     436.43 0.0004308 ***
+factor(weekend)                1   10.078       206     426.36 0.0015007 ** 
+average_temp                   1   35.195       205     391.16 2.983e-09 ***
+as.numeric(rain)               1  162.807       204     228.35 &lt; 2.2e-16 ***
+average_temp:as.numeric(rain)  1   10.205       203     218.15 0.0014003 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pois_dev_gof</span>(bb_negbin_model) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$pval
+[1] 0.2216194
+
+$df
+[1] 203</code></pre>
+</div>
+</div>
+<p><br>
+</p>
+</section>
+</section>
+<section id="queensboro-bridge" class="level2">
+<h2 class="anchored" data-anchor-id="queensboro-bridge"><strong>#2 Queensboro Bridge</strong></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>NY_cycling_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 214 × 11
+   date       day       brooklynbridge manhattanbridge williamsburgbridge
+   &lt;date&gt;     &lt;chr&gt;              &lt;dbl&gt;           &lt;dbl&gt;              &lt;dbl&gt;
+ 1 2017-04-01 Saturday             606            1446               1915
+ 2 2017-04-02 Sunday              2021            3943               4207
+ 3 2017-04-03 Monday              2470            4988               5178
+ 4 2017-04-04 Tuesday              723            1913               2279
+ 5 2017-04-05 Wednesday           2807            5276               5711
+ 6 2017-04-06 Thursday             461            1324               1739
+ 7 2017-04-07 Friday              1222            2955               3399
+ 8 2017-04-08 Saturday            1674            3163               4082
+ 9 2017-04-09 Sunday              2375            4377               4886
+10 2017-04-10 Monday              3324            6359               6881
+# ℹ 204 more rows
+# ℹ 6 more variables: queensborobridge &lt;dbl&gt;, total &lt;dbl&gt;, month &lt;chr&gt;,
+#   rain &lt;dbl&gt;, average_temp &lt;dbl&gt;, weekend &lt;dbl&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>qb_correlation_data <span class="ot">&lt;-</span> NY_cycling_data[, <span class="fu">c</span>(<span class="st">"queensborobridge"</span>, <span class="st">"average_temp"</span>, <span class="st">"rain"</span>)]</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggpairs</span>(qb_correlation_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="NYtransportation_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="NYtransportation_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="NYtransportation_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Month:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>NY_cycling_data <span class="sc">%&gt;%</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(month) <span class="sc">%&gt;%</span></span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">mean =</span> <span class="fu">mean</span>(queensborobridge), <span class="at">sd =</span> <span class="fu">sd</span>(queensborobridge)) <span class="sc">%&gt;%</span></span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">month =</span> <span class="fu">factor</span>(month, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"April"</span>, <span class="st">"May"</span>, <span class="st">"June"</span>, <span class="st">"July"</span>, <span class="st">"August"</span>, <span class="st">"September"</span>, <span class="st">"October"</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(month)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 4
+  month         n  mean    sd
+  &lt;fct&gt;     &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 April        30 3483. 1147.
+2 May          31 4075. 1438.
+3 June         30 4737. 1139.
+4 July         31 4551. 1073.
+5 August       31 5169. 1075.
+6 September    30 5054. 1158.
+7 October      31 4773. 1349.</code></pre>
+</div>
+</div>
+<p>Days:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>NY_cycling_data <span class="sc">%&gt;%</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(weekend) <span class="sc">%&gt;%</span></span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">mean =</span> <span class="fu">mean</span>(queensborobridge), <span class="at">sd =</span> <span class="fu">sd</span>(queensborobridge))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 4
+  weekend     n  mean    sd
+    &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+1       0   152 4923. 1271.
+2       1    62 3638.  877.</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a>NY_cycling_data <span class="sc">%&gt;%</span></span>
+<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">day =</span> <span class="fu">factor</span>(day, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Monday"</span>, <span class="st">"Tuesday"</span>, <span class="st">"Wednesday"</span>, <span class="st">"Thursday"</span>, <span class="st">"Friday"</span>, <span class="st">"Saturday"</span>, <span class="st">"Sunday"</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(day) <span class="sc">%&gt;%</span></span>
+<span id="cb67-8"><a href="#cb67-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_count =</span> <span class="fu">mean</span>(queensborobridge)) <span class="sc">%&gt;%</span></span>
+<span id="cb67-9"><a href="#cb67-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> day, <span class="at">y =</span> total_count)) <span class="sc">+</span></span>
+<span id="cb67-10"><a href="#cb67-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span></span>
+<span id="cb67-11"><a href="#cb67-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Average Daily Count of Cyclists on Queensboro Bridge"</span>,</span>
+<span id="cb67-12"><a href="#cb67-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Day of the Week"</span>,</span>
+<span id="cb67-13"><a href="#cb67-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Average Count of Cyclists"</span>) <span class="sc">+</span></span>
+<span id="cb67-14"><a href="#cb67-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="NYtransportation_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>total_count_brooklyn <span class="ot">&lt;-</span> NY_cycling_data <span class="sc">%&gt;%</span></span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(month) <span class="sc">%&gt;%</span></span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_count =</span> <span class="fu">mean</span>(queensborobridge))</span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(total_count_brooklyn, <span class="fu">aes</span>(<span class="at">x =</span> month, <span class="at">y =</span> total_count)) <span class="sc">+</span></span>
+<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span></span>
+<span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Average Monthly Counts of Cyclists on Queensboro Bridge"</span>,</span>
+<span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Months</span></span>
+<span id="cb68-9"><a href="#cb68-9" aria-hidden="true" tabindex="-1"></a><span class="st">       "</span>,</span>
+<span id="cb68-10"><a href="#cb68-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Average Count of Cyclists"</span>) <span class="sc">+</span></span>
+<span id="cb68-11"><a href="#cb68-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="NYtransportation_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="modeling-1" class="level2">
+<h2 class="anchored" data-anchor-id="modeling-1">Modeling:</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>queensborobridge_data <span class="ot">&lt;-</span>NY_cycling_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(queensborobridge,rain, average_temp, weekend,month)</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>centered_queensborobridge_data <span class="ot">&lt;-</span> queensborobridge_data <span class="sc">%&gt;%</span></span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rain =</span> rain <span class="sc">-</span> <span class="fu">mean</span>(rain), <span class="at">average_temp =</span> average_temp <span class="sc">-</span> <span class="fu">mean</span>(average_temp))</span>
+<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a>centered_queensborobridge_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 214 × 5
+   queensborobridge   rain average_temp weekend month
+              &lt;dbl&gt;  &lt;dbl&gt;        &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;
+ 1             1430 -0.132       -26.6        1 April
+ 2             2862 -0.132       -16.6        1 April
+ 3             3689 -0.102       -11.6        0 April
+ 4             1666  1.05        -19.6        0 April
+ 5             4197 -0.132       -13.6        0 April
+ 6             1372  0.598       -23.2        0 April
+ 7             2765 -0.131       -22.6        0 April
+ 8             2691 -0.132       -20.2        1 April
+ 9             3261 -0.132       -12.6        1 April
+10             4731 -0.132        -3.66       0 April
+# ℹ 204 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>centered_queensborobridge_data <span class="ot">&lt;-</span> queensborobridge_data <span class="sc">%&gt;%</span></span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rain =</span> rain <span class="sc">-</span> <span class="fu">mean</span>(rain), <span class="at">average_temp =</span> average_temp <span class="sc">-</span> <span class="fu">mean</span>(average_temp))</span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>centered_queensborobridge_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 214 × 5
+   queensborobridge   rain average_temp weekend month
+              &lt;dbl&gt;  &lt;dbl&gt;        &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;
+ 1             1430 -0.132       -26.6        1 April
+ 2             2862 -0.132       -16.6        1 April
+ 3             3689 -0.102       -11.6        0 April
+ 4             1666  1.05        -19.6        0 April
+ 5             4197 -0.132       -13.6        0 April
+ 6             1372  0.598       -23.2        0 April
+ 7             2765 -0.131       -22.6        0 April
+ 8             2691 -0.132       -20.2        1 April
+ 9             3261 -0.132       -12.6        1 April
+10             4731 -0.132        -3.66       0 April
+# ℹ 204 more rows</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Check the relationship between varaibles --</span></span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Against the Null Model </span></span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>qb_null_poisson_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(queensborobridge <span class="sc">~</span> <span class="dv">1</span>, <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>), <span class="at">data =</span> centered_queensborobridge_data)</span>
+<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(qb_null_poisson_model )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = queensborobridge ~ 1, family = poisson(link = "log"), 
+    data = centered_queensborobridge_data)
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept) 8.422990   0.001013    8312   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 89871  on 213  degrees of freedom
+Residual deviance: 89871  on 213  degrees of freedom
+AIC: 92057
+
+Number of Fisher Scoring iterations: 4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co">#average_temp + Rain</span></span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>qb_poisson_model2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(queensborobridge <span class="sc">~</span> average_temp <span class="sc">+</span> <span class="fu">as.numeric</span>(rain), <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>), <span class="at">data =</span> centered_queensborobridge_data)</span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Average_ + Rain + month </span></span>
+<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a>qb_poisson_model3 <span class="ot">&lt;-</span> <span class="fu">glm</span>(queensborobridge <span class="sc">~</span>average_temp <span class="sc">+</span> <span class="fu">as.numeric</span>(rain) <span class="sc">+</span> <span class="fu">factor</span>(month) , <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>), <span class="at">data =</span> centered_queensborobridge_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Full Model (Sequence) Added average_temp + rain + month + days </span></span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>qb_full_poisson_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(queensborobridge <span class="sc">~</span> average_temp <span class="sc">+</span> <span class="fu">as.numeric</span>(rain) <span class="sc">+</span> <span class="fu">factor</span>(month) <span class="sc">+</span> <span class="fu">factor</span>(weekend), <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>), <span class="at">data =</span>centered_queensborobridge_data)</span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(qb_null_poisson_model,qb_poisson_model2,qb_poisson_model3, qb_full_poisson_model, <span class="at">test =</span> <span class="st">"LRT"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table
+
+Model 1: queensborobridge ~ 1
+Model 2: queensborobridge ~ average_temp + as.numeric(rain)
+Model 3: queensborobridge ~ average_temp + as.numeric(rain) + factor(month)
+Model 4: queensborobridge ~ average_temp + as.numeric(rain) + factor(month) + 
+    factor(weekend)
+  Resid. Df Resid. Dev Df Deviance  Pr(&gt;Chi)    
+1       213      89871                          
+2       211      47806  2    42065 &lt; 2.2e-16 ***
+3       205      42077  6     5729 &lt; 2.2e-16 ***
+4       204      28862  1    13215 &lt; 2.2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co">#pois_pearson_gof(poisson_model) #&gt;&gt;&gt; 1.445647e-193 BAD FIT </span></span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a><span class="co">#pois_dev_gof(poisson_model) </span></span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a><span class="co">#anova(poisson_model, test= "LRT")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="mfp-1" class="level3">
+<h3 class="anchored" data-anchor-id="mfp-1">MFP:</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="co">#library(mfp)</span></span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="co">#mfp::mfp(williamsburgbridge ~ fp(average_temp), </span></span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a> <span class="co">#        family = poisson,</span></span>
+<span id="cb79-4"><a href="#cb79-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">#       data = centered_queensborobridge_data)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-1" class="level3">
+<h3 class="anchored" data-anchor-id="section-1"></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>centered_queensborobridge_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(queensborobridge) <span class="sc">%&gt;%</span> skimr<span class="sc">::</span><span class="fu">skim</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<table style="width: auto;" class="table table-condensed">
+<caption>
+Data summary
+</caption>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Name
+</td>
+<td style="text-align:left;">
+Piped data
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Number of rows
+</td>
+<td style="text-align:left;">
+214
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Number of columns
+</td>
+<td style="text-align:left;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+_______________________
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Column type frequency:
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+numeric
+</td>
+<td style="text-align:left;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+________________________
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Group variables
+</td>
+<td style="text-align:left;">
+None
+</td>
+</tr>
+</tbody>
+
+</table>
+<p><strong>Variable type: numeric</strong></p>
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+skim_variable
+</th>
+<th style="text-align:right;">
+n_missing
+</th>
+<th style="text-align:right;">
+complete_rate
+</th>
+<th style="text-align:right;">
+mean
+</th>
+<th style="text-align:right;">
+sd
+</th>
+<th style="text-align:right;">
+p0
+</th>
+<th style="text-align:right;">
+p25
+</th>
+<th style="text-align:right;">
+p50
+</th>
+<th style="text-align:right;">
+p75
+</th>
+<th style="text-align:right;">
+p100
+</th>
+<th style="text-align:left;">
+hist
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+queensborobridge
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4550.49
+</td>
+<td style="text-align:right;">
+1306.9
+</td>
+<td style="text-align:right;">
+865
+</td>
+<td style="text-align:right;">
+3746
+</td>
+<td style="text-align:right;">
+4681
+</td>
+<td style="text-align:right;">
+5692
+</td>
+<td style="text-align:right;">
+6582
+</td>
+<td style="text-align:left;">
+▁▂▆▇▇
+</td>
+</tr>
+</tbody>
+
+</table>
+</div>
+</div>
+</section>
+<section id="confounding-and-interaction" class="level3">
+<h3 class="anchored" data-anchor-id="confounding-and-interaction"><strong>Confounding and Interaction:</strong></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="co">#confounding</span></span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the full Poisson regression model</span></span>
+<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a>qb_full_poisson_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(queensborobridge <span class="sc">~</span>  <span class="fu">factor</span>(month) <span class="sc">+</span> <span class="fu">factor</span>(weekend)<span class="sc">+</span> average_temp <span class="sc">+</span> <span class="fu">as.numeric</span>(rain) , <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>), <span class="at">data =</span>centered_queensborobridge_data)</span>
+<span id="cb81-5"><a href="#cb81-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-6"><a href="#cb81-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Include interaction term between average_temp and rain</span></span>
+<span id="cb81-7"><a href="#cb81-7" aria-hidden="true" tabindex="-1"></a>qb_interaction_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(queensborobridge <span class="sc">~</span>  <span class="fu">factor</span>(month) <span class="sc">+</span> <span class="fu">factor</span>(weekend) <span class="sc">+</span> average_temp <span class="sc">+</span> <span class="fu">as.numeric</span>(rain) <span class="sc">+</span> average_temp <span class="sc">*</span> <span class="fu">as.numeric</span>(rain) , <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>), <span class="at">data =</span> centered_queensborobridge_data)</span>
+<span id="cb81-8"><a href="#cb81-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-9"><a href="#cb81-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare the models using ANOVA</span></span>
+<span id="cb81-10"><a href="#cb81-10" aria-hidden="true" tabindex="-1"></a>qb_anova_result <span class="ot">&lt;-</span> <span class="fu">anova</span>(qb_full_poisson_model, qb_interaction_model, <span class="at">test =</span> <span class="st">"LRT"</span>)</span>
+<span id="cb81-11"><a href="#cb81-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(qb_anova_result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table
+
+Model 1: queensborobridge ~ factor(month) + factor(weekend) + average_temp + 
+    as.numeric(rain)
+Model 2: queensborobridge ~ factor(month) + factor(weekend) + average_temp + 
+    as.numeric(rain) + average_temp * as.numeric(rain)
+  Resid. Df Resid. Dev Df Deviance  Pr(&gt;Chi)    
+1       204      28862                          
+2       203      26986  1   1875.5 &lt; 2.2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</section>
+<section id="overdispersion" class="level3">
+<h3 class="anchored" data-anchor-id="overdispersion">OverDispersion:</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>qb_interaction_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(queensborobridge <span class="sc">~</span>  <span class="fu">factor</span>(month) <span class="sc">+</span> <span class="fu">factor</span>(weekend) <span class="sc">+</span> average_temp <span class="sc">+</span> <span class="fu">as.numeric</span>(rain) <span class="sc">+</span> average_temp <span class="sc">*</span> <span class="fu">as.numeric</span>(rain) , <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>), <span class="at">data =</span> centered_queensborobridge_data)</span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>AER<span class="sc">::</span><span class="fu">dispersiontest</span>(qb_full_poisson_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Overdispersion test
+
+data:  qb_full_poisson_model
+z = 8.0441, p-value = 4.343e-16
+alternative hypothesis: true dispersion is greater than 1
+sample estimates:
+dispersion 
+  127.1055 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>qb_aic_value_org <span class="ot">&lt;-</span> <span class="fu">AIC</span>(qb_poisson_model3)</span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>qb_bic_value_org <span class="ot">&lt;-</span> <span class="fu">BIC</span>(qb_poisson_model3)</span>
+<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a>qb_aic_value <span class="ot">&lt;-</span> <span class="fu">AIC</span>(qb_interaction_model)</span>
+<span id="cb85-4"><a href="#cb85-4" aria-hidden="true" tabindex="-1"></a>qb_bic_value <span class="ot">&lt;-</span> <span class="fu">BIC</span>(qb_interaction_model)</span>
+<span id="cb85-5"><a href="#cb85-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb85-6"><a href="#cb85-6" aria-hidden="true" tabindex="-1"></a>qb_aic_value_org</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 44279.06</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>qb_bic_value_org</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 44309.35</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>qb_aic_value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 29192.34</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>qb_bic_value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 29229.37</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>qb_negbin_model <span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(queensborobridge <span class="sc">~</span> <span class="fu">factor</span>(month) <span class="sc">+</span> <span class="fu">factor</span>(weekend) <span class="sc">+</span>  average_temp <span class="sc">+</span> <span class="fu">as.numeric</span>(rain) <span class="sc">+</span> average_temp <span class="sc">*</span> <span class="fu">as.numeric</span>(rain), <span class="at">data=</span> centered_queensborobridge_data)</span>
+<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(qb_negbin_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm.nb(formula = queensborobridge ~ factor(month) + factor(weekend) + 
+    average_temp + as.numeric(rain) + average_temp * as.numeric(rain), 
+    data = centered_queensborobridge_data, init.theta = 26.71052056, 
+    link = log)
+
+Coefficients:
+                               Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)                    8.340899   0.042686 195.401  &lt; 2e-16 ***
+factor(month)August            0.182421   0.059749   3.053 0.002265 ** 
+factor(month)July              0.052082   0.063149   0.825 0.409517    
+factor(month)June              0.133452   0.058782   2.270 0.023191 *  
+factor(month)May               0.117206   0.050696   2.312 0.020783 *  
+factor(month)October           0.226185   0.051554   4.387 1.15e-05 ***
+factor(month)September         0.195243   0.056535   3.453 0.000553 ***
+factor(weekend)1              -0.272855   0.029434  -9.270  &lt; 2e-16 ***
+average_temp                   0.012305   0.001975   6.232 4.62e-10 ***
+as.numeric(rain)              -0.418544   0.039411 -10.620  &lt; 2e-16 ***
+average_temp:as.numeric(rain)  0.011667   0.003756   3.106 0.001894 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for Negative Binomial(26.7105) family taken to be 1)
+
+    Null deviance: 633.42  on 213  degrees of freedom
+Residual deviance: 215.91  on 203  degrees of freedom
+AIC: 3514.1
+
+Number of Fisher Scoring iterations: 1
+
+              Theta:  26.71 
+          Std. Err.:  2.59 
+
+ 2 x log-likelihood:  -3490.13 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="co">#GOF</span></span>
+<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(qb_negbin_model, <span class="at">test =</span> <span class="st">"LRT"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in anova.negbin(qb_negbin_model, test = "LRT"): tests made without
+re-estimating 'theta'</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table
+
+Model: Negative Binomial(26.7105), link: log
+
+Response: queensborobridge
+
+Terms added sequentially (first to last)
+
+                              Df Deviance Resid. Df Resid. Dev  Pr(&gt;Chi)    
+NULL                                            213     633.42              
+factor(month)                  6   88.118       207     545.31 &lt; 2.2e-16 ***
+factor(weekend)                1   95.466       206     449.84 &lt; 2.2e-16 ***
+average_temp                   1   53.646       205     396.19 2.401e-13 ***
+as.numeric(rain)               1  169.809       204     226.39 &lt; 2.2e-16 ***
+average_temp:as.numeric(rain)  1   10.471       203     215.91  0.001213 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="manhattan-bridge" class="level1">
+<h1>#3 Manhattan Bridge</h1>
+<p>How are our independent variables related to the outcome?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>NY_cycling_data <span class="sc">%&gt;%</span></span>
+<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(weekend) <span class="sc">%&gt;%</span></span>
+<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">mean =</span> <span class="fu">mean</span>(manhattanbridge), <span class="at">sd =</span> <span class="fu">sd</span>(manhattanbridge)) <span class="sc">%&gt;%</span><span class="fu">arrange</span>(weekend)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 4
+  weekend     n  mean    sd
+    &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+1       0   152 5859. 1700.
+2       1    62 4087. 1110.</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a>NY_cycling_data <span class="sc">%&gt;%</span></span>
+<span id="cb100-3"><a href="#cb100-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(month) <span class="sc">%&gt;%</span></span>
+<span id="cb100-4"><a href="#cb100-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">mean =</span> <span class="fu">mean</span>(manhattanbridge), <span class="at">sd =</span> <span class="fu">sd</span>(manhattanbridge)) <span class="sc">%&gt;%</span></span>
+<span id="cb100-5"><a href="#cb100-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">month =</span> <span class="fu">factor</span>(month, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"April"</span>, <span class="st">"May"</span>, <span class="st">"June"</span>, <span class="st">"July"</span>, <span class="st">"August"</span>, <span class="st">"September"</span>, <span class="st">"October"</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb100-6"><a href="#cb100-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(month)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 4
+  month         n  mean    sd
+  &lt;fct&gt;     &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 April        30 4354. 1693.
+2 May          31 4959. 2064.
+3 June         30 5780. 1664.
+4 July         31 5425. 1566.
+5 August       31 5730. 1515.
+6 September    30 5871. 1614.
+7 October      31 5298. 1710.</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GGally)</span>
+<span id="cb102-2"><a href="#cb102-2" aria-hidden="true" tabindex="-1"></a>mb_correlation_data <span class="ot">&lt;-</span> NY_cycling_data[, <span class="fu">c</span>(<span class="st">"manhattanbridge"</span>, <span class="st">"average_temp"</span>, <span class="st">"rain"</span>)]</span>
+<span id="cb102-3"><a href="#cb102-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggpairs</span>(mb_correlation_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="NYtransportation_files/figure-html/unnamed-chunk-48-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="NYtransportation_files/figure-html/unnamed-chunk-49-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="NYtransportation_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="NYtransportation_files/figure-html/unnamed-chunk-51-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<pre><code></code></pre>
+<section id="modeling-2" class="level2">
+<h2 class="anchored" data-anchor-id="modeling-2">Modeling:</h2>
+<p>I will be centering since there’s interaction:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Centering on its mean</span></span>
+<span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb104-3"><a href="#cb104-3" aria-hidden="true" tabindex="-1"></a>manhattanbridge_data <span class="ot">&lt;-</span>NY_cycling_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(manhattanbridge,rain, average_temp, weekend,month)</span>
+<span id="cb104-4"><a href="#cb104-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb104-5"><a href="#cb104-5" aria-hidden="true" tabindex="-1"></a>centered_manhattanbridge_data <span class="ot">&lt;-</span> manhattanbridge_data <span class="sc">%&gt;%</span></span>
+<span id="cb104-6"><a href="#cb104-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rain =</span> rain <span class="sc">-</span> <span class="fu">mean</span>(rain), <span class="at">average_temp =</span> average_temp <span class="sc">-</span> <span class="fu">mean</span>(average_temp))</span>
+<span id="cb104-7"><a href="#cb104-7" aria-hidden="true" tabindex="-1"></a>centered_manhattanbridge_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 214 × 5
+   manhattanbridge   rain average_temp weekend month
+             &lt;dbl&gt;  &lt;dbl&gt;        &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;
+ 1            1446 -0.132       -26.6        1 April
+ 2            3943 -0.132       -16.6        1 April
+ 3            4988 -0.102       -11.6        0 April
+ 4            1913  1.05        -19.6        0 April
+ 5            5276 -0.132       -13.6        0 April
+ 6            1324  0.598       -23.2        0 April
+ 7            2955 -0.131       -22.6        0 April
+ 8            3163 -0.132       -20.2        1 April
+ 9            4377 -0.132       -12.6        1 April
+10            6359 -0.132        -3.66       0 April
+# ℹ 204 more rows</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Check the relationship between varaibles --</span></span>
+<span id="cb106-2"><a href="#cb106-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Against the Null Model </span></span>
+<span id="cb106-3"><a href="#cb106-3" aria-hidden="true" tabindex="-1"></a>mb_null_poisson_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(manhattanbridge <span class="sc">~</span> <span class="dv">1</span>, <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>), <span class="at">data =</span> centered_manhattanbridge_data)</span>
+<span id="cb106-4"><a href="#cb106-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mb_null_poisson_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = manhattanbridge ~ 1, family = poisson(link = "log"), 
+    data = centered_manhattanbridge_data)
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept) 8.584008   0.000935    9181   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 139331  on 213  degrees of freedom
+Residual deviance: 139331  on 213  degrees of freedom
+AIC: 141546
+
+Number of Fisher Scoring iterations: 4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="co">#average_temp + Rain</span></span>
+<span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a>mb_poisson_model2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(manhattanbridge <span class="sc">~</span> average_temp <span class="sc">+</span> <span class="fu">as.numeric</span>(rain), <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>), <span class="at">data =</span> centered_manhattanbridge_data)</span>
+<span id="cb108-3"><a href="#cb108-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb108-4"><a href="#cb108-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Average_ + Rain + month </span></span>
+<span id="cb108-5"><a href="#cb108-5" aria-hidden="true" tabindex="-1"></a>mb_poisson_model3 <span class="ot">&lt;-</span> <span class="fu">glm</span>(manhattanbridge <span class="sc">~</span>average_temp <span class="sc">+</span> <span class="fu">as.numeric</span>(rain) <span class="sc">+</span> <span class="fu">factor</span>(month) , <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>), <span class="at">data =</span> centered_manhattanbridge_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Full Model (Sequence) Added average_temp + rain + month + days </span></span>
+<span id="cb109-2"><a href="#cb109-2" aria-hidden="true" tabindex="-1"></a>mb_full_poisson_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(manhattanbridge <span class="sc">~</span> average_temp <span class="sc">+</span> <span class="fu">as.numeric</span>(rain) <span class="sc">+</span> <span class="fu">factor</span>(month) <span class="sc">+</span> <span class="fu">factor</span>(weekend), <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>), <span class="at">data =</span> centered_manhattanbridge_data)</span>
+<span id="cb109-3"><a href="#cb109-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb109-4"><a href="#cb109-4" aria-hidden="true" tabindex="-1"></a>mb_interaction_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(manhattanbridge <span class="sc">~</span>  <span class="fu">factor</span>(month) <span class="sc">+</span> <span class="fu">factor</span>(weekend) <span class="sc">+</span> average_temp <span class="sc">+</span> <span class="fu">as.numeric</span>(rain) <span class="sc">+</span>average_temp <span class="sc">*</span> <span class="fu">as.numeric</span>(rain) , <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>), <span class="at">data =</span> centered_manhattanbridge_data)</span>
+<span id="cb109-5"><a href="#cb109-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb109-6"><a href="#cb109-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb109-7"><a href="#cb109-7" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mb_null_poisson_model,mb_poisson_model2,mb_poisson_model3, mb_full_poisson_model, <span class="at">test =</span> <span class="st">"LRT"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table
+
+Model 1: manhattanbridge ~ 1
+Model 2: manhattanbridge ~ average_temp + as.numeric(rain)
+Model 3: manhattanbridge ~ average_temp + as.numeric(rain) + factor(month)
+Model 4: manhattanbridge ~ average_temp + as.numeric(rain) + factor(month) + 
+    factor(weekend)
+  Resid. Df Resid. Dev Df Deviance  Pr(&gt;Chi)    
+1       213     139331                          
+2       211      73891  2    65440 &lt; 2.2e-16 ***
+3       205      71226  6     2665 &lt; 2.2e-16 ***
+4       204      49048  1    22178 &lt; 2.2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pois_pearson_gof</span>(mb_full_poisson_model) <span class="co">#&gt;&gt;&gt; 1.445647e-193 BAD FIT </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$pval
+[1] 0
+
+$df
+[1] 204</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="co">#pois_dev_gof(bb_full_poisson_model) </span></span>
+<span id="cb113-2"><a href="#cb113-2" aria-hidden="true" tabindex="-1"></a><span class="co">#anova(bb_full_poisson_model, test= "LRT")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="mfp-2" class="level2">
+<h2 class="anchored" data-anchor-id="mfp-2">MFP:</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="co">#MFP</span></span>
+<span id="cb114-2"><a href="#cb114-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb114-3"><a href="#cb114-3" aria-hidden="true" tabindex="-1"></a>mfp<span class="sc">::</span><span class="fu">mfp</span>(manhattanbridge <span class="sc">~</span> <span class="fu">fp</span>(average_temp), </span>
+<span id="cb114-4"><a href="#cb114-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">family =</span> poisson,</span>
+<span id="cb114-5"><a href="#cb114-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">data =</span> centered_manhattanbridge_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+mfp::mfp(formula = manhattanbridge ~ fp(average_temp), data = centered_manhattanbridge_data, 
+    family = poisson)
+
+
+Deviance table:
+         Resid. Dev
+Null model   139330.7
+Linear model     120378.5
+Final model  112140.3
+
+Fractional polynomials:
+             df.initial select alpha df.final power1 power2
+average_temp          4      1  0.05        4      1      1
+
+
+Transformations of covariates:
+                                                                                               formula
+average_temp I(((average_temp+26.7)/10)^1)+I(((average_temp+26.7)/10)^1*log(((average_temp+26.7)/10)))
+
+Coefficients:
+     Intercept  average_temp.1  average_temp.2  
+        7.3486          0.8667         -0.3879  
+
+Degrees of Freedom: 213 Total (i.e. Null);  211 Residual
+Null Deviance:      139300 
+Residual Deviance: 112100   AIC: 114400 </code></pre>
+</div>
+</div>
+<section id="section-2" class="level3">
+<h3 class="anchored" data-anchor-id="section-2"></h3>
+</section>
+<section id="interaction-and-confouding-1" class="level3">
+<h3 class="anchored" data-anchor-id="interaction-and-confouding-1">Interaction and Confouding:</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the full Poisson regression model</span></span>
+<span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a>mb_full_poisson_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(manhattanbridge <span class="sc">~</span>  <span class="fu">factor</span>(month) <span class="sc">+</span> <span class="fu">factor</span>(weekend)<span class="sc">+</span> average_temp <span class="sc">+</span> <span class="fu">as.numeric</span>(rain) , <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>), <span class="at">data =</span> centered_manhattanbridge_data)</span>
+<span id="cb116-3"><a href="#cb116-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb116-4"><a href="#cb116-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Include interaction term between average_temp and rain</span></span>
+<span id="cb116-5"><a href="#cb116-5" aria-hidden="true" tabindex="-1"></a>mb_interaction_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(manhattanbridge <span class="sc">~</span>  <span class="fu">factor</span>(month) <span class="sc">+</span> <span class="fu">factor</span>(weekend) <span class="sc">+</span> average_temp <span class="sc">+</span> <span class="fu">as.numeric</span>(rain) <span class="sc">+</span>average_temp <span class="sc">*</span> <span class="fu">as.numeric</span>(rain) , <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>), <span class="at">data =</span> centered_manhattanbridge_data)</span>
+<span id="cb116-6"><a href="#cb116-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb116-7"><a href="#cb116-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare the models using ANOVA</span></span>
+<span id="cb116-8"><a href="#cb116-8" aria-hidden="true" tabindex="-1"></a>anova_result <span class="ot">&lt;-</span> <span class="fu">anova</span>(mb_full_poisson_model, mb_interaction_model, <span class="at">test =</span> <span class="st">"LRT"</span>)</span>
+<span id="cb116-9"><a href="#cb116-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(anova_result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table
+
+Model 1: manhattanbridge ~ factor(month) + factor(weekend) + average_temp + 
+    as.numeric(rain)
+Model 2: manhattanbridge ~ factor(month) + factor(weekend) + average_temp + 
+    as.numeric(rain) + average_temp * as.numeric(rain)
+  Resid. Df Resid. Dev Df Deviance  Pr(&gt;Chi)    
+1       204      49048                          
+2       203      46481  1   2566.8 &lt; 2.2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</section>
+<section id="overdispersion-test-and-aicbic-1" class="level3">
+<h3 class="anchored" data-anchor-id="overdispersion-test-and-aicbic-1">Overdispersion Test and AIC/BIC:</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>mb_interaction_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(manhattanbridge <span class="sc">~</span> average_temp <span class="sc">*</span> <span class="fu">as.numeric</span>(rain) <span class="sc">+</span> <span class="fu">factor</span>(month) <span class="sc">+</span> <span class="fu">factor</span>(weekend), <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>), <span class="at">data =</span> centered_manhattanbridge_data)</span>
+<span id="cb118-2"><a href="#cb118-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-3"><a href="#cb118-3" aria-hidden="true" tabindex="-1"></a>AER<span class="sc">::</span><span class="fu">dispersiontest</span>(mb_interaction_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Overdispersion test
+
+data:  mb_interaction_model
+z = 5.8533, p-value = 2.41e-09
+alternative hypothesis: true dispersion is greater than 1
+sample estimates:
+dispersion 
+  218.9714 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtain AIC and BIC</span></span>
+<span id="cb120-2"><a href="#cb120-2" aria-hidden="true" tabindex="-1"></a>bb_aic_value_org <span class="ot">&lt;-</span> <span class="fu">AIC</span>(mb_poisson_model3)</span>
+<span id="cb120-3"><a href="#cb120-3" aria-hidden="true" tabindex="-1"></a>bb_bic_value_org <span class="ot">&lt;-</span> <span class="fu">BIC</span>(mb_poisson_model3)</span>
+<span id="cb120-4"><a href="#cb120-4" aria-hidden="true" tabindex="-1"></a>bb_aic_value <span class="ot">&lt;-</span> <span class="fu">AIC</span>(mb_interaction_model)</span>
+<span id="cb120-5"><a href="#cb120-5" aria-hidden="true" tabindex="-1"></a>bb_bic_value <span class="ot">&lt;-</span> <span class="fu">BIC</span>(mb_interaction_model)</span>
+<span id="cb120-6"><a href="#cb120-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-7"><a href="#cb120-7" aria-hidden="true" tabindex="-1"></a>bb_aic_value_org</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 73457.29</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb122"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a>bb_bic_value_org</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 73487.58</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb124"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a>bb_aic_value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 48716.9</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb126"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a>bb_bic_value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 48753.93</code></pre>
+</div>
+</div>
+<p>How is our outcome variable distributed?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb128"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a>centered_manhattanbridge_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(manhattanbridge) <span class="sc">%&gt;%</span> skimr<span class="sc">::</span><span class="fu">skim</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<table style="width: auto;" class="table table-condensed">
+<caption>
+Data summary
+</caption>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Name
+</td>
+<td style="text-align:left;">
+Piped data
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Number of rows
+</td>
+<td style="text-align:left;">
+214
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Number of columns
+</td>
+<td style="text-align:left;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+_______________________
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Column type frequency:
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+numeric
+</td>
+<td style="text-align:left;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+________________________
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Group variables
+</td>
+<td style="text-align:left;">
+None
+</td>
+</tr>
+</tbody>
+
+</table>
+<p><strong>Variable type: numeric</strong></p>
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+skim_variable
+</th>
+<th style="text-align:right;">
+n_missing
+</th>
+<th style="text-align:right;">
+complete_rate
+</th>
+<th style="text-align:right;">
+mean
+</th>
+<th style="text-align:right;">
+sd
+</th>
+<th style="text-align:right;">
+p0
+</th>
+<th style="text-align:right;">
+p25
+</th>
+<th style="text-align:right;">
+p50
+</th>
+<th style="text-align:right;">
+p75
+</th>
+<th style="text-align:right;">
+p100
+</th>
+<th style="text-align:left;">
+hist
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+manhattanbridge
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+5345.49
+</td>
+<td style="text-align:right;">
+1746.55
+</td>
+<td style="text-align:right;">
+484
+</td>
+<td style="text-align:right;">
+4308
+</td>
+<td style="text-align:right;">
+5607.5
+</td>
+<td style="text-align:right;">
+6759.5
+</td>
+<td style="text-align:right;">
+8239
+</td>
+<td style="text-align:left;">
+▂▃▇▇▇
+</td>
+</tr>
+</tbody>
+
+</table>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb129"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb129-1"><a href="#cb129-1" aria-hidden="true" tabindex="-1"></a>mb_negbin_model <span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(manhattanbridge <span class="sc">~</span> <span class="fu">factor</span>(month) <span class="sc">+</span> <span class="fu">factor</span>(weekend) <span class="sc">+</span>  average_temp <span class="sc">+</span> <span class="fu">as.numeric</span>(rain) <span class="sc">+</span> average_temp <span class="sc">*</span> <span class="fu">as.numeric</span>(rain), <span class="at">data=</span> centered_manhattanbridge_data)</span>
+<span id="cb129-2"><a href="#cb129-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb129-3"><a href="#cb129-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mb_negbin_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm.nb(formula = manhattanbridge ~ factor(month) + factor(weekend) + 
+    average_temp + as.numeric(rain) + average_temp * as.numeric(rain), 
+    data = centered_manhattanbridge_data, init.theta = 16.45457534, 
+    link = log)
+
+Coefficients:
+                               Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)                    8.586228   0.054290 158.156  &lt; 2e-16 ***
+factor(month)August            0.032358   0.076011   0.426   0.6703    
+factor(month)July             -0.019426   0.080330  -0.242   0.8089    
+factor(month)June              0.090065   0.074774   1.204   0.2284    
+factor(month)May               0.075805   0.064473   1.176   0.2397    
+factor(month)October           0.094629   0.065580   1.443   0.1490    
+factor(month)September         0.093956   0.071918   1.306   0.1914    
+factor(weekend)1              -0.333854   0.037442  -8.917  &lt; 2e-16 ***
+average_temp                   0.014117   0.002512   5.620 1.91e-08 ***
+as.numeric(rain)              -0.547218   0.050117 -10.919  &lt; 2e-16 ***
+average_temp:as.numeric(rain)  0.010468   0.004773   2.193   0.0283 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for Negative Binomial(16.4546) family taken to be 1)
+
+    Null deviance: 546.42  on 213  degrees of freedom
+Residual deviance: 216.68  on 203  degrees of freedom
+AIC: 3678.2
+
+Number of Fisher Scoring iterations: 1
+
+              Theta:  16.45 
+          Std. Err.:  1.58 
+
+ 2 x log-likelihood:  -3654.23 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb131"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb131-1"><a href="#cb131-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mb_negbin_model, <span class="at">test =</span> <span class="st">"LRT"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in anova.negbin(mb_negbin_model, test = "LRT"): tests made without
+re-estimating 'theta'</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table
+
+Model: Negative Binomial(16.4546), link: log
+
+Response: manhattanbridge
+
+Terms added sequentially (first to last)
+
+                              Df Deviance Resid. Df Resid. Dev  Pr(&gt;Chi)    
+NULL                                            213     546.42              
+factor(month)                  6   32.384       207     514.04 1.377e-05 ***
+factor(weekend)                1   84.754       206     429.28 &lt; 2.2e-16 ***
+average_temp                   1   43.113       205     386.17 5.167e-11 ***
+as.numeric(rain)               1  164.130       204     222.04 &lt; 2.2e-16 ***
+average_temp:as.numeric(rain)  1    5.358       203     216.68   0.02062 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</section>
+<section id="williamsburg-bridge" class="level3">
+<h3 class="anchored" data-anchor-id="williamsburg-bridge">#4 Williamsburg Bridge</h3>
+<p>How are our independent variables related to the outcome?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb134"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a>NY_cycling_data <span class="sc">%&gt;%</span></span>
+<span id="cb134-2"><a href="#cb134-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(weekend) <span class="sc">%&gt;%</span></span>
+<span id="cb134-3"><a href="#cb134-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">mean =</span> <span class="fu">mean</span>(williamsburgbridge), <span class="at">sd =</span> <span class="fu">sd</span>(williamsburgbridge)) <span class="sc">%&gt;%</span><span class="fu">arrange</span>(weekend)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 4
+  weekend     n  mean    sd
+    &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+1       0   152 6535. 1725.
+2       1    62 4868. 1180.</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb136"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb136-1"><a href="#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb136-2"><a href="#cb136-2" aria-hidden="true" tabindex="-1"></a>NY_cycling_data <span class="sc">%&gt;%</span></span>
+<span id="cb136-3"><a href="#cb136-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(month) <span class="sc">%&gt;%</span></span>
+<span id="cb136-4"><a href="#cb136-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">mean =</span> <span class="fu">mean</span>(williamsburgbridge), <span class="at">sd =</span> <span class="fu">sd</span>(williamsburgbridge)) <span class="sc">%&gt;%</span></span>
+<span id="cb136-5"><a href="#cb136-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">month =</span> <span class="fu">factor</span>(month, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"April"</span>, <span class="st">"May"</span>, <span class="st">"June"</span>, <span class="st">"July"</span>, <span class="st">"August"</span>, <span class="st">"September"</span>, <span class="st">"October"</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb136-6"><a href="#cb136-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(month)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 4
+  month         n  mean    sd
+  &lt;fct&gt;     &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 April        30 4942. 1734.
+2 May          31 5710. 2007.
+3 June         30 6620  1599.
+4 July         31 6074. 1576.
+5 August       31 6407. 1490.
+6 September    30 6614. 1642.
+7 October      31 5995. 1746.</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb138"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb138-1"><a href="#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GGally)</span>
+<span id="cb138-2"><a href="#cb138-2" aria-hidden="true" tabindex="-1"></a>wb_correlation_data <span class="ot">&lt;-</span> NY_cycling_data[, <span class="fu">c</span>(<span class="st">"williamsburgbridge"</span>, <span class="st">"average_temp"</span>, <span class="st">"rain"</span>)]</span>
+<span id="cb138-3"><a href="#cb138-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggpairs</span>(wb_correlation_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="NYtransportation_files/figure-html/unnamed-chunk-63-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="NYtransportation_files/figure-html/unnamed-chunk-64-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="NYtransportation_files/figure-html/unnamed-chunk-65-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="NYtransportation_files/figure-html/unnamed-chunk-66-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="modeling-3" class="level2">
+<h2 class="anchored" data-anchor-id="modeling-3">Modeling:</h2>
+<p>I will be centering since there’s interaction:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb139"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb139-1"><a href="#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Centering on its mean</span></span>
+<span id="cb139-2"><a href="#cb139-2" aria-hidden="true" tabindex="-1"></a>williamsburgbridge_data <span class="ot">&lt;-</span>NY_cycling_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(williamsburgbridge,rain, average_temp, weekend,month)</span>
+<span id="cb139-3"><a href="#cb139-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb139-4"><a href="#cb139-4" aria-hidden="true" tabindex="-1"></a>centered_williamsburgbridge_data <span class="ot">&lt;-</span> williamsburgbridge_data <span class="sc">%&gt;%</span></span>
+<span id="cb139-5"><a href="#cb139-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rain =</span> rain <span class="sc">-</span> <span class="fu">mean</span>(rain), <span class="at">average_temp =</span> average_temp <span class="sc">-</span> <span class="fu">mean</span>(average_temp))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb140"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb140-1"><a href="#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Check the relationship between varaibles --</span></span>
+<span id="cb140-2"><a href="#cb140-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Against the Null Model </span></span>
+<span id="cb140-3"><a href="#cb140-3" aria-hidden="true" tabindex="-1"></a>wb_null_poisson_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(williamsburgbridge <span class="sc">~</span> <span class="dv">1</span>, <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>), <span class="at">data =</span> centered_williamsburgbridge_data)</span>
+<span id="cb140-4"><a href="#cb140-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(wb_null_poisson_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = williamsburgbridge ~ 1, family = poisson(link = "log"), 
+    data = centered_williamsburgbridge_data)
+
+Coefficients:
+             Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept) 8.7080877  0.0008787    9910   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 123257  on 213  degrees of freedom
+Residual deviance: 123257  on 213  degrees of freedom
+AIC: 125503
+
+Number of Fisher Scoring iterations: 4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb142"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb142-1"><a href="#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="co">#average_temp + Rain</span></span>
+<span id="cb142-2"><a href="#cb142-2" aria-hidden="true" tabindex="-1"></a>wb_poisson_model2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(williamsburgbridge <span class="sc">~</span> average_temp <span class="sc">+</span> <span class="fu">as.numeric</span>(rain), <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>), <span class="at">data =</span> centered_williamsburgbridge_data)</span>
+<span id="cb142-3"><a href="#cb142-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb142-4"><a href="#cb142-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Average_ + Rain + month </span></span>
+<span id="cb142-5"><a href="#cb142-5" aria-hidden="true" tabindex="-1"></a>wb_poisson_model3 <span class="ot">&lt;-</span> <span class="fu">glm</span>(williamsburgbridge <span class="sc">~</span>average_temp <span class="sc">+</span> <span class="fu">as.numeric</span>(rain) <span class="sc">+</span> <span class="fu">factor</span>(month) , <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>), <span class="at">data =</span> centered_williamsburgbridge_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb143"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb143-1"><a href="#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Full Model (Sequence) Added average_temp + rain + month + days </span></span>
+<span id="cb143-2"><a href="#cb143-2" aria-hidden="true" tabindex="-1"></a>wb_full_poisson_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(williamsburgbridge <span class="sc">~</span> average_temp <span class="sc">+</span> <span class="fu">as.numeric</span>(rain) <span class="sc">+</span> <span class="fu">factor</span>(month) <span class="sc">+</span> <span class="fu">factor</span>(weekend), <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>), <span class="at">data =</span> centered_williamsburgbridge_data)</span>
+<span id="cb143-3"><a href="#cb143-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb143-4"><a href="#cb143-4" aria-hidden="true" tabindex="-1"></a>wb_interaction_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(williamsburgbridge <span class="sc">~</span>  <span class="fu">factor</span>(month) <span class="sc">+</span> <span class="fu">factor</span>(weekend) <span class="sc">+</span> average_temp <span class="sc">+</span> <span class="fu">as.numeric</span>(rain) <span class="sc">+</span>average_temp <span class="sc">*</span> <span class="fu">as.numeric</span>(rain) , <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>), <span class="at">data =</span> centered_williamsburgbridge_data)</span>
+<span id="cb143-5"><a href="#cb143-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb143-6"><a href="#cb143-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb143-7"><a href="#cb143-7" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(wb_null_poisson_model,wb_poisson_model2,wb_poisson_model3, wb_full_poisson_model, <span class="at">test =</span> <span class="st">"LRT"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table
+
+Model 1: williamsburgbridge ~ 1
+Model 2: williamsburgbridge ~ average_temp + as.numeric(rain)
+Model 3: williamsburgbridge ~ average_temp + as.numeric(rain) + factor(month)
+Model 4: williamsburgbridge ~ average_temp + as.numeric(rain) + factor(month) + 
+    factor(weekend)
+  Resid. Df Resid. Dev Df Deviance  Pr(&gt;Chi)    
+1       213     123257                          
+2       211      64038  2    59220 &lt; 2.2e-16 ***
+3       205      60339  6     3699 &lt; 2.2e-16 ***
+4       204      43805  1    16534 &lt; 2.2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb145"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb145-1"><a href="#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pois_pearson_gof</span>(wb_full_poisson_model) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$pval
+[1] 0
+
+$df
+[1] 204</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb147"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb147-1"><a href="#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="co">#pois_dev_gof(bb_full_poisson_model) </span></span>
+<span id="cb147-2"><a href="#cb147-2" aria-hidden="true" tabindex="-1"></a><span class="co">#anova(bb_full_poisson_model, test= "LRT")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="mfp-3" class="level2">
+<h2 class="anchored" data-anchor-id="mfp-3">MFP:</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb148"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb148-1"><a href="#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="co">#MFP</span></span>
+<span id="cb148-2"><a href="#cb148-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb148-3"><a href="#cb148-3" aria-hidden="true" tabindex="-1"></a>mfp<span class="sc">::</span><span class="fu">mfp</span>(williamsburgbridge <span class="sc">~</span> <span class="fu">fp</span>(average_temp), </span>
+<span id="cb148-4"><a href="#cb148-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">family =</span> poisson,</span>
+<span id="cb148-5"><a href="#cb148-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">data =</span> centered_williamsburgbridge_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+mfp::mfp(formula = williamsburgbridge ~ fp(average_temp), data = centered_williamsburgbridge_data, 
+    family = poisson)
+
+
+Deviance table:
+         Resid. Dev
+Null model   123257.2
+Linear model     104421.4
+Final model  96228.34
+
+Fractional polynomials:
+             df.initial select alpha df.final power1 power2
+average_temp          4      1  0.05        4      1      1
+
+
+Transformations of covariates:
+                                                                                               formula
+average_temp I(((average_temp+26.7)/10)^1)+I(((average_temp+26.7)/10)^1*log(((average_temp+26.7)/10)))
+
+Coefficients:
+     Intercept  average_temp.1  average_temp.2  
+        7.5640          0.8031         -0.3594  
+
+Degrees of Freedom: 213 Total (i.e. Null);  211 Residual
+Null Deviance:      123300 
+Residual Deviance: 96230    AIC: 98480 </code></pre>
+</div>
+</div>
+<section id="section-3" class="level3">
+<h3 class="anchored" data-anchor-id="section-3"></h3>
+</section>
+<section id="interaction-and-confouding-2" class="level3">
+<h3 class="anchored" data-anchor-id="interaction-and-confouding-2">Interaction and Confouding:</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb150"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb150-1"><a href="#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the full Poisson regression model</span></span>
+<span id="cb150-2"><a href="#cb150-2" aria-hidden="true" tabindex="-1"></a>wb_full_poisson_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(williamsburgbridge <span class="sc">~</span>  <span class="fu">factor</span>(month) <span class="sc">+</span> <span class="fu">factor</span>(weekend)<span class="sc">+</span> average_temp <span class="sc">+</span> <span class="fu">as.numeric</span>(rain) , <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>), <span class="at">data =</span> centered_williamsburgbridge_data)</span>
+<span id="cb150-3"><a href="#cb150-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb150-4"><a href="#cb150-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Include interaction term between average_temp and rain</span></span>
+<span id="cb150-5"><a href="#cb150-5" aria-hidden="true" tabindex="-1"></a>wb_interaction_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(williamsburgbridge <span class="sc">~</span>  <span class="fu">factor</span>(month) <span class="sc">+</span> <span class="fu">factor</span>(weekend) <span class="sc">+</span> average_temp <span class="sc">+</span> <span class="fu">as.numeric</span>(rain) <span class="sc">+</span>average_temp <span class="sc">*</span> <span class="fu">as.numeric</span>(rain) , <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>), <span class="at">data =</span> centered_williamsburgbridge_data)</span>
+<span id="cb150-6"><a href="#cb150-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb150-7"><a href="#cb150-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare the models using ANOVA</span></span>
+<span id="cb150-8"><a href="#cb150-8" aria-hidden="true" tabindex="-1"></a>wb_anova_result <span class="ot">&lt;-</span> <span class="fu">anova</span>(wb_full_poisson_model, wb_interaction_model, <span class="at">test =</span> <span class="st">"LRT"</span>)</span>
+<span id="cb150-9"><a href="#cb150-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(wb_anova_result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table
+
+Model 1: williamsburgbridge ~ factor(month) + factor(weekend) + average_temp + 
+    as.numeric(rain)
+Model 2: williamsburgbridge ~ factor(month) + factor(weekend) + average_temp + 
+    as.numeric(rain) + average_temp * as.numeric(rain)
+  Resid. Df Resid. Dev Df Deviance  Pr(&gt;Chi)    
+1       204      43805                          
+2       203      41193  1   2611.8 &lt; 2.2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</section>
+<section id="overdispersion-test-and-aicbic-2" class="level3">
+<h3 class="anchored" data-anchor-id="overdispersion-test-and-aicbic-2">Overdispersion Test and AIC/BIC:</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb152"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb152-1"><a href="#cb152-1" aria-hidden="true" tabindex="-1"></a>wb_interaction_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(williamsburgbridge <span class="sc">~</span> average_temp <span class="sc">*</span> <span class="fu">as.numeric</span>(rain) <span class="sc">+</span> <span class="fu">factor</span>(month) <span class="sc">+</span> <span class="fu">factor</span>(weekend), <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>), <span class="at">data =</span> centered_williamsburgbridge_data)</span>
+<span id="cb152-2"><a href="#cb152-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb152-3"><a href="#cb152-3" aria-hidden="true" tabindex="-1"></a>AER<span class="sc">::</span><span class="fu">dispersiontest</span>(wb_interaction_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Overdispersion test
+
+data:  wb_interaction_model
+z = 6.3159, p-value = 1.343e-10
+alternative hypothesis: true dispersion is greater than 1
+sample estimates:
+dispersion 
+  189.7187 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb154"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb154-1"><a href="#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtain AIC and BIC</span></span>
+<span id="cb154-2"><a href="#cb154-2" aria-hidden="true" tabindex="-1"></a>bb_aic_value_org <span class="ot">&lt;-</span> <span class="fu">AIC</span>(wb_poisson_model3)</span>
+<span id="cb154-3"><a href="#cb154-3" aria-hidden="true" tabindex="-1"></a>bb_bic_value_org <span class="ot">&lt;-</span> <span class="fu">BIC</span>(wb_poisson_model3)</span>
+<span id="cb154-4"><a href="#cb154-4" aria-hidden="true" tabindex="-1"></a>bb_aic_value <span class="ot">&lt;-</span> <span class="fu">AIC</span>(wb_interaction_model)</span>
+<span id="cb154-5"><a href="#cb154-5" aria-hidden="true" tabindex="-1"></a>bb_bic_value <span class="ot">&lt;-</span> <span class="fu">BIC</span>(wb_interaction_model)</span>
+<span id="cb154-6"><a href="#cb154-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb154-7"><a href="#cb154-7" aria-hidden="true" tabindex="-1"></a>bb_aic_value_org</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 62600.79</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb156"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb156-1"><a href="#cb156-1" aria-hidden="true" tabindex="-1"></a>bb_bic_value_org</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 62631.09</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb158"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb158-1"><a href="#cb158-1" aria-hidden="true" tabindex="-1"></a>bb_aic_value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 43459.49</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb160"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb160-1"><a href="#cb160-1" aria-hidden="true" tabindex="-1"></a>bb_bic_value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 43496.51</code></pre>
+</div>
+</div>
+<p>How is our outcome variable distributed?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb162"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb162-1"><a href="#cb162-1" aria-hidden="true" tabindex="-1"></a>centered_manhattanbridge_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(manhattanbridge) <span class="sc">%&gt;%</span> skimr<span class="sc">::</span><span class="fu">skim</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<table style="width: auto;" class="table table-condensed">
+<caption>
+Data summary
+</caption>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Name
+</td>
+<td style="text-align:left;">
+Piped data
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Number of rows
+</td>
+<td style="text-align:left;">
+214
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Number of columns
+</td>
+<td style="text-align:left;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+_______________________
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Column type frequency:
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+numeric
+</td>
+<td style="text-align:left;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+________________________
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Group variables
+</td>
+<td style="text-align:left;">
+None
+</td>
+</tr>
+</tbody>
+
+</table>
+<p><strong>Variable type: numeric</strong></p>
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+skim_variable
+</th>
+<th style="text-align:right;">
+n_missing
+</th>
+<th style="text-align:right;">
+complete_rate
+</th>
+<th style="text-align:right;">
+mean
+</th>
+<th style="text-align:right;">
+sd
+</th>
+<th style="text-align:right;">
+p0
+</th>
+<th style="text-align:right;">
+p25
+</th>
+<th style="text-align:right;">
+p50
+</th>
+<th style="text-align:right;">
+p75
+</th>
+<th style="text-align:right;">
+p100
+</th>
+<th style="text-align:left;">
+hist
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+manhattanbridge
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+5345.49
+</td>
+<td style="text-align:right;">
+1746.55
+</td>
+<td style="text-align:right;">
+484
+</td>
+<td style="text-align:right;">
+4308
+</td>
+<td style="text-align:right;">
+5607.5
+</td>
+<td style="text-align:right;">
+6759.5
+</td>
+<td style="text-align:right;">
+8239
+</td>
+<td style="text-align:left;">
+▂▃▇▇▇
+</td>
+</tr>
+</tbody>
+
+</table>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb163"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb163-1"><a href="#cb163-1" aria-hidden="true" tabindex="-1"></a>wb_negbin_model <span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(williamsburgbridge <span class="sc">~</span> <span class="fu">factor</span>(month) <span class="sc">+</span> <span class="fu">factor</span>(weekend) <span class="sc">+</span>  average_temp <span class="sc">+</span> <span class="fu">as.numeric</span>(rain) <span class="sc">+</span> average_temp <span class="sc">*</span> <span class="fu">as.numeric</span>(rain), <span class="at">data=</span> centered_williamsburgbridge_data)</span>
+<span id="cb163-2"><a href="#cb163-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb163-3"><a href="#cb163-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(wb_negbin_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm.nb(formula = williamsburgbridge ~ factor(month) + factor(weekend) + 
+    average_temp + as.numeric(rain) + average_temp * as.numeric(rain), 
+    data = centered_williamsburgbridge_data, init.theta = 22.61322593, 
+    link = log)
+
+Coefficients:
+                               Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)                    8.693054   0.046327 187.646  &lt; 2e-16 ***
+factor(month)August            0.033580   0.064861   0.518  0.60466    
+factor(month)July             -0.022322   0.068547  -0.326  0.74469    
+factor(month)June              0.111304   0.063804   1.744  0.08108 .  
+factor(month)May               0.106213   0.055015   1.931  0.05353 .  
+factor(month)October           0.099706   0.055960   1.782  0.07479 .  
+factor(month)September         0.101551   0.061368   1.655  0.09797 .  
+factor(weekend)1              -0.267363   0.031948  -8.369  &lt; 2e-16 ***
+average_temp                   0.013237   0.002144   6.175 6.62e-10 ***
+as.numeric(rain)              -0.463885   0.042748 -10.852  &lt; 2e-16 ***
+average_temp:as.numeric(rain)  0.011032   0.004072   2.709  0.00675 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for Negative Binomial(22.6132) family taken to be 1)
+
+    Null deviance: 566.08  on 213  degrees of freedom
+Residual deviance: 216.02  on 203  degrees of freedom
+AIC: 3670.4
+
+Number of Fisher Scoring iterations: 1
+
+              Theta:  22.61 
+          Std. Err.:  2.18 
+
+ 2 x log-likelihood:  -3646.364 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb165"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb165-1"><a href="#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="co">#GOF </span></span>
+<span id="cb165-2"><a href="#cb165-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(wb_negbin_model, <span class="at">test =</span> <span class="st">"LRT"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in anova.negbin(wb_negbin_model, test = "LRT"): tests made without
+re-estimating 'theta'</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table
+
+Model: Negative Binomial(22.6132), link: log
+
+Response: williamsburgbridge
+
+Terms added sequentially (first to last)
+
+                              Df Deviance Resid. Df Resid. Dev  Pr(&gt;Chi)    
+NULL                                            213     566.08              
+factor(month)                  6   41.745       207     524.34 2.064e-07 ***
+factor(weekend)                1   76.868       206     447.47 &lt; 2.2e-16 ***
+average_temp                   1   51.747       205     395.72 6.312e-13 ***
+as.numeric(rain)               1  171.615       204     224.11 &lt; 2.2e-16 ***
+average_temp:as.numeric(rain)  1    8.086       203     216.02  0.004461 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb168"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb168-1"><a href="#cb168-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pois_dev_gof</span>(bb_negbin_model) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$pval
+[1] 0.2216194
+
+$df
+[1] 203</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb170"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb170-1"><a href="#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pois_dev_gof</span>(wb_negbin_model) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$pval
+[1] 0.2527467
+
+$df
+[1] 203</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb172"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb172-1"><a href="#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pois_dev_gof</span>(qb_negbin_model) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$pval
+[1] 0.2543887
+
+$df
+[1] 203</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb174"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb174-1"><a href="#cb174-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pois_dev_gof</span>(mb_negbin_model) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$pval
+[1] 0.2428304
+
+$df
+[1] 203</code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
